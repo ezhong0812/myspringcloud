@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_springcloud15" default="compile.module.springcloud15">
+  <dirname property="module.springcloud15.basedir" file="${ant.file.module_springcloud15}"/>
+  
+  <property name="module.jdk.home.springcloud15" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.springcloud15" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.springcloud15" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.springcloud15" value="-encoding UTF-8 -source 1.5 -target 1.5 ${compiler.args}"/>
+  
+  <property name="springcloud15.output.dir" value="${module.springcloud15.basedir}/target/classes"/>
+  <property name="springcloud15.testoutput.dir" value="${module.springcloud15.basedir}/target/test-classes"/>
+  
+  <path id="springcloud15.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="springcloud15.module.production.classpath">
+    <path refid="${module.jdk.classpath.springcloud15}"/>
+  </path>
+  
+  <path id="springcloud15.runtime.production.module.classpath">
+    <pathelement location="${springcloud15.output.dir}"/>
+  </path>
+  
+  <path id="springcloud15.module.classpath">
+    <path refid="${module.jdk.classpath.springcloud15}"/>
+    <pathelement location="${springcloud15.output.dir}"/>
+  </path>
+  
+  <path id="springcloud15.runtime.module.classpath">
+    <pathelement location="${springcloud15.testoutput.dir}"/>
+    <pathelement location="${springcloud15.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.springcloud15">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.springcloud15">
+    <patternset refid="excluded.from.module.springcloud15"/>
+  </patternset>
+  
+  <path id="springcloud15.module.sourcepath">
+    <dirset dir="${module.springcloud15.basedir}">
+      <include name="src/main/java"/>
+      <include name="src/main/resources"/>
+    </dirset>
+  </path>
+  
+  <path id="springcloud15.module.test.sourcepath">
+    <dirset dir="${module.springcloud15.basedir}">
+      <include name="src/test/java"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.springcloud15" depends="compile.module.springcloud15.production,compile.module.springcloud15.tests" description="Compile module springcloud15"/>
+  
+  <target name="compile.module.springcloud15.production" depends="register.custom.compilers" description="Compile module springcloud15; production classes">
+    <mkdir dir="${springcloud15.output.dir}"/>
+    <javac2 destdir="${springcloud15.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.springcloud15}/javac">
+      <compilerarg line="${compiler.args.springcloud15}"/>
+      <bootclasspath refid="springcloud15.module.bootclasspath"/>
+      <classpath refid="springcloud15.module.production.classpath"/>
+      <src refid="springcloud15.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.springcloud15"/>
+    </javac2>
+    
+    <copy todir="${springcloud15.output.dir}">
+      <fileset dir="${module.springcloud15.basedir}/src/main/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.springcloud15.basedir}/src/main/resources">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.springcloud15.tests" depends="register.custom.compilers,compile.module.springcloud15.production" description="compile module springcloud15; test classes" unless="skip.tests">
+    <mkdir dir="${springcloud15.testoutput.dir}"/>
+    <javac2 destdir="${springcloud15.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.springcloud15}/javac">
+      <compilerarg line="${compiler.args.springcloud15}"/>
+      <bootclasspath refid="springcloud15.module.bootclasspath"/>
+      <classpath refid="springcloud15.module.classpath"/>
+      <src refid="springcloud15.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.springcloud15"/>
+    </javac2>
+    
+    <copy todir="${springcloud15.testoutput.dir}">
+      <fileset dir="${module.springcloud15.basedir}/src/test/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.springcloud15" description="cleanup module">
+    <delete dir="${springcloud15.output.dir}"/>
+    <delete dir="${springcloud15.testoutput.dir}"/>
+  </target>
+</project>
