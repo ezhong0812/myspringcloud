@@ -16,8 +16,7 @@ public class DataMysqlApplication {
     static final String USER = "springuser";
     static final String PASS = "123456";
 
-    public static void main(String[] args) {
-
+    private void jdbcDemo() {
         Connection conn = null;
         Statement stmt = null;
         try {
@@ -71,9 +70,17 @@ public class DataMysqlApplication {
             }
         }
         System.out.println("Goodbye!");
+    }
+
+    public static void main(String[] args) {
+
 
 //        SpringApplication.run(DataMysqlApplication.class, args);
 
-
+        FruitInfoUtil.getFruitFieldInfo(Apple.class);
+        System.out.println("------------------");
+        FruitInfoUtil.getFruitClassInfo(Apple.class);
+        System.out.println("------------------");
+        FruitInfoUtil.getFruitClassInfo(Apple3.class);
     }
 }
