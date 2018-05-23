@@ -17,7 +17,7 @@ public class StockOrderService {
     private StockOrderRespository stockOrderRespository;
 
 //    可以解决问题，但并发能力降低
-    public synchronized int createOrderSync(int sid) {
+    public synchronized int createOrder(int sid) {
         Stock stock = checkStock(sid);
         if (stock == null) {
             return 0;
@@ -29,14 +29,14 @@ public class StockOrderService {
 //    很多问题
 //    数据库链接太多、超时
 //    超卖
-    public int createOrder(int sid) {
-        Stock stock = checkStock(sid);
-        if (stock == null) {
-            return 0;
-        }
-        saleStock(stock);
-        return createOrder(stock);
-    }
+//    public int createOrder(int sid) {
+//        Stock stock = checkStock(sid);
+//        if (stock == null) {
+//            return 0;
+//        }
+//        saleStock(stock);
+//        return createOrder(stock);
+//    }
 
     private Stock checkStock(int sid) {
         Stock stock = stockRespository.findById(sid);
