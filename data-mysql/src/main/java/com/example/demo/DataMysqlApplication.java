@@ -16,7 +16,7 @@ public class DataMysqlApplication {
     static final String USER = "springuser";
     static final String PASS = "123456";
 
-    private void jdbcDemo() {
+    private void demoJdbc() {
         Connection conn = null;
         Statement stmt = null;
         try {
@@ -72,15 +72,47 @@ public class DataMysqlApplication {
         System.out.println("Goodbye!");
     }
 
-    public static void main(String[] args) {
-
-
-//        SpringApplication.run(DataMysqlApplication.class, args);
-
+    private void demoAnnotation() {
         FruitInfoUtil.getFruitFieldInfo(Apple.class);
         System.out.println("------------------");
         FruitInfoUtil.getFruitClassInfo(Apple.class);
         System.out.println("------------------");
         FruitInfoUtil.getFruitClassInfo(Apple3.class);
+    }
+
+    private static void demoTypeTrans() {
+//        short s = 99 S;
+//        float z = 1.0;
+//        Incompatible types Required float,Found double
+        float z = 1.0f;
+        int t = "abc".length();
+//        char c = 17;
+
+
+        short s = 1;
+//        s = s + 1;   Required short,Found int
+        s += 1;
+
+        int num = 32;
+        System.out.println( num >> 8); // 0
+        System.out.println( num >> 16); // 0
+        System.out.println( num >> 32); // 32
+
+        String a = "hello2";
+        final String b = "hello";
+        String c = "hello";
+        String d = b + 2;
+        String e = c + 2;
+        System.out.println(a == d);
+        System.out.println(a == e);
+    }
+
+    public static void main(String[] args) {
+
+
+//        SpringApplication.run(DataMysqlApplication.class, args);
+
+        demoTypeTrans();
+
     }
 }

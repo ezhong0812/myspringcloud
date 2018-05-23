@@ -1,11 +1,9 @@
 package com.example.demo;
 
+import com.example.demo.ssm.StockOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by Jason on 18/4/4.
@@ -34,5 +32,15 @@ public class MainController {
     Iterable<User> getAllUsers() {
         // This returns a JSON or XML with the users
         return userRepository.findAll();
+    }
+
+
+    @Autowired
+    StockOrderService stockOrderService;
+    @GetMapping(path="/order/{sid}")
+    public @ResponseBody
+    Integer order(@PathVariable("sid") Integer sid) {
+        // This returns a JSON or XML with the users
+        return stockOrderService.createOrder(sid);
     }
 }
