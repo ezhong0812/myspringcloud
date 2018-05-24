@@ -5,8 +5,11 @@ import com.netflix.zuul.context.RequestContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.Ordered;
 
 import javax.servlet.http.HttpServletRequest;
+
+import static org.springframework.cloud.netflix.zuul.filters.support.FilterConstants.SERVICE_ID_KEY;
 
 
 /**
@@ -19,11 +22,13 @@ public class TestFilter extends ZuulFilter {
     @Override
     public String filterType() {
         return "pre";
+
     }
 
     @Override
     public int filterOrder() {
-        return 0;
+//        return 0;
+        return Ordered.LOWEST_PRECEDENCE;
     }
 
     @Override
@@ -36,7 +41,11 @@ public class TestFilter extends ZuulFilter {
         RequestContext context = RequestContext.getCurrentContext();
         HttpServletRequest request = context.getRequest();
 
-        logger.info("--->>> TokenFilter {},{},{}", request.getMethod(), request.getRequestURL().toString(), port);
+        logger.info("--->>> TokenFilter {},{}, {}, {}",
+                request.getMethod(),
+                request.getRequestURL().toString(),
+                context.getRouteHost(),
+                context.get(SERVICE_ID_KEY));
         return null;
     }
 }

@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
+
 /**
  * Created by Jason on 18/4/4.
  */
@@ -39,6 +41,7 @@ public class MainController {
     StockOrderService stockOrderService;
     @GetMapping(path="/order/{sid}")
     public @ResponseBody
+    @Transactional
     Integer order(@PathVariable("sid") Integer sid) {
         // This returns a JSON or XML with the users
         return stockOrderService.createOrder(sid);

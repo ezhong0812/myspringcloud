@@ -84,6 +84,10 @@ public class DruidConfiguration {
         datasource.setPoolPreparedStatements(poolPreparedStatements);
         datasource.setMaxPoolPreparedStatementPerConnectionSize(maxPoolPreparedStatementPerConnectionSize);
 //        datasource.setUseGlobalDataSourceStat(useGlobalDataSourceStat);
+
+        datasource.setRemoveAbandoned(true);
+        datasource.setRemoveAbandonedTimeout(60);
+        datasource.setLogAbandoned(true);
         try {
             datasource.setFilters(filters);
         } catch (SQLException e) {

@@ -1,9 +1,6 @@
 package com.example.demo.ssm;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by Jason on 18/5/23.
@@ -16,6 +13,8 @@ public class Stock {
     private String name;
     private Integer count;
     private Integer sale;
+
+    @Version
     private Integer version;
 
     public Integer getId() {
